@@ -1,0 +1,134 @@
+/* General styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #192543;
+  background-color: white;
+}
+
+.calculator-container {
+  max-width: 500px;
+  margin: 0 auto 40px auto; /* No top margin, 40px bottom */
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: none;
+  background-color: white;
+}
+
+/* Remove any top margin/padding from the first child inside the container */
+.calculator-container > *:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Hide any h1 if present */
+h1 {
+  display: none;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 2px solid #7fc28f;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Switch container */
+.switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: #192543;
+  font-weight: bold;
+}
+
+/* The actual switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: white;
+  border: 2px solid #00a6c5;
+  border-radius: 34px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 3px;
+  background-color: #00a6c5;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* Button styles */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#calculateBtn {
+  background-color: #07b0a0;
+  color: white;
+}
+
+#resetBtn {
+  background-color: #7fc28f;
+  color: white;
+}
+
+#result {
+  margin-top: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #192543;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+
+  <meta charset="UTF-8" /> 
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+
+  <title>Statutory Redundancy Calculator</title> 
+
+  <link rel="stylesheet" href="style.css" /> 
+
+</head> 
+
+<body> 
+
+  <div class="calculator-container"> 
+
+    <label for="age">Age:</label> 
+
+    <input type="number" id="age" min="16" max="100" placeholder="e.g. 35" required /> 
+
+  
+
+    <label for="years">Years of Service:</label> 
+
+    <input type="number" id="years" min="0" max="50" placeholder="e.g. 8" required /> 
+
+  
+
+    <label for="pay">Weekly Gross Pay (£):</label> 
+
+    <input type="number" id="pay" min="0" placeholder="e.g. 500" required /> 
+
+  
+
+    <!-- Switch toggle --> 
+
+    <div class="switch-container"> 
+
+      <span>Great Britain</span> 
+
+      <label class="switch"> 
+
+        <input type="checkbox" id="regionSwitch" /> 
+
+        <span class="slider"></span> 
+
+      </label> 
+
+      <span>Northern Ireland</span> 
+
+    </div> 
+
+  
+
+    <div class="button-group"> 
+
+      <button id="calculateBtn">Calculate</button> 
+
+      <button id="resetBtn" type="button">Reset</button> 
+
+    </div> 
+
+  
+
+    <p id="result"></p> 
+
+  </div> 
+
+  
+
+  <script src="script.js"></script> 
+
+</body> 
+
+</html> 
