@@ -1,0 +1,24 @@
+/*
+Manual test cases for the calculator.
+
+2025/26:
+- Age 45, service 18, pay £1,000, redundancy 05/04/2026
+  Weekly pay used = £719
+  5 years x 1.5 weeks + 13 years x 1 week = 20.5 weeks
+  Expected = £14,739.50
+
+2026/27:
+- Age 45, service 18, pay £1,000, redundancy 06/04/2026
+  Weekly pay used = £751
+  5 years x 1.5 weeks + 13 years x 1 week = 20.5 weeks
+  Expected = £15,395.50
+
+Age-band example:
+- Age 45, service 20, pay £751
+  5 years at 1.5 weeks + 15 years at 1 week = 22.5 weeks.
+  Expected 2026/27 result = £16,897.50.
+
+The calculation counts backwards from the redundancy date so that each
+completed year of service is valued according to the employee's age during
+that year. Qualifying service is capped at 20 years.
+*/

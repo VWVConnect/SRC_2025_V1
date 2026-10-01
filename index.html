@@ -1,79 +1,114 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Statutory redundancy pay calculator based on GOV.UK rates for 2025/26 and 2026/27.">
+  <title>Statutory Redundancy Pay Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="calculator-shell">
+    <header class="hero">
+      <div class="brand-mark" aria-hidden="true">SR</div>
+      <div>
+        <p class="eyebrow">EMPLOYMENT CALCULATOR</p>
+        <h1>Statutory Redundancy Pay Calculator</h1>
+        <p class="intro">Estimate statutory redundancy pay using the GOV.UK statutory formula.</p>
+      </div>
+    </header>
 
-<html lang="en"> 
+    <section class="card" aria-labelledby="calculator-heading">
+      <div class="card-heading">
+        <div>
+          <p class="section-label">Calculate your entitlement</p>
+          <h2 id="calculator-heading">Enter the employee's details</h2>
+        </div>
+      </div>
 
-<head> 
+      <div class="rate-panel">
+        <div>
+          <span class="rate-label">Rates used</span>
+          <strong id="rateYearLabel">2026/27</strong>
+        </div>
+        <div class="toggle" role="group" aria-label="Select financial year">
+          <button type="button" class="rate-btn" data-year="2025" aria-pressed="false">2025/26</button>
+          <button type="button" class="rate-btn active" data-year="2026" aria-pressed="true">2026/27</button>
+        </div>
+      </div>
 
-  <meta charset="UTF-8" /> 
+      <form id="calculatorForm" novalidate>
+        <div class="field">
+          <label for="redundancyDate">What date were you made redundant?</label>
+          <input id="redundancyDate" name="redundancyDate" type="date" required>
+          <p class="hint">This date determines the statutory weekly pay cap.</p>
+          <p class="error" id="redundancyDateError" role="alert"></p>
+        </div>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+        <div class="field">
+          <label for="age">How old were you on the date you were made redundant?</label>
+          <input id="age" name="age" type="number" min="16" max="100" step="1" inputmode="numeric" placeholder="e.g. 45" required>
+          <p class="error" id="ageError" role="alert"></p>
+        </div>
 
-  <title>Statutory Redundancy Calculator</title> 
+        <div class="field">
+          <label for="years">How many years have you worked for your employer?</label>
+          <input id="years" name="years" type="number" min="0" max="20" step="1" inputmode="numeric" placeholder="e.g. 8" required>
+          <p class="hint">Only count full years of service. For example, 3 years and 9 months count as 3 years.</p>
+          <p class="error" id="yearsError" role="alert"></p>
+        </div>
 
-  <link rel="stylesheet" href="style.css" /> 
+        <div class="field">
+          <label for="pay">What is your weekly pay before tax and any other deductions?</label>
+          <div class="currency-input">
+            <span aria-hidden="true">£</span>
+            <input id="pay" name="pay" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 750.00" required>
+          </div>
+          <p class="hint">Enter your normal weekly pay. The statutory calculation uses the applicable weekly pay cap.</p>
+          <p class="error" id="payError" role="alert"></p>
+        </div>
 
-</head> 
+        <button class="calculate-btn" id="calculateBtn" type="submit">Calculate redundancy pay</button>
+      </form>
+    </section>
 
-<body> 
+    <section id="result" class="result-card hidden" aria-live="polite" aria-labelledby="result-heading">
+      <div class="result-top">
+        <div>
+          <p class="section-label">Estimated statutory redundancy pay</p>
+          <h2 id="result-heading">£0.00</h2>
+        </div>
+        <div class="result-badge">Calculation complete</div>
+      </div>
 
-  <div class="calculator-container"> 
+      <div class="summary-grid">
+        <div><span>Redundancy date</span><strong id="resultDate">—</strong></div>
+        <div><span>Financial year</span><strong id="resultYear">—</strong></div>
+        <div><span>Weekly pay used</span><strong id="resultWeeklyPay">—</strong></div>
+        <div><span>Years counted</span><strong id="resultYears">—</strong></div>
+      </div>
 
-    <label for="age">Age:</label> 
+      <div class="breakdown">
+        <h3>Calculation breakdown</h3>
+        <div id="breakdownRows"></div>
+        <div class="total-row">
+          <span>Total</span>
+          <strong id="resultTotal">£0.00</strong>
+        </div>
+      </div>
 
-    <input type="number" id="age" min="16" max="100" placeholder="e.g. 35" required /> 
+      <div class="notice" id="capNotice"></div>
+      <p class="disclaimer">
+        This calculator provides an estimate of statutory redundancy pay only. It does not account for enhanced contractual or discretionary redundancy schemes, continuity-of-service modifications, or other exceptions. Check the applicable legislation and GOV.UK guidance for the circumstances in question.
+      </p>
+      <button type="button" class="reset-btn" id="resetBtn">Start again</button>
+    </section>
 
-  
-
-    <label for="years">Years of Service:</label> 
-
-    <input type="number" id="years" min="0" max="50" placeholder="e.g. 8" required /> 
-
-  
-
-    <label for="pay">Weekly Gross Pay (£):</label> 
-
-    <input type="number" id="pay" min="0" placeholder="e.g. 500" required /> 
-
-  
-
-    <!-- Switch toggle --> 
-
-    <div class="switch-container"> 
-
-      <span>Great Britain</span> 
-
-      <label class="switch"> 
-
-        <input type="checkbox" id="regionSwitch" /> 
-
-        <span class="slider"></span> 
-
-      </label> 
-
-      <span>Northern Ireland</span> 
-
-    </div> 
-
-  
-
-    <div class="button-group"> 
-
-      <button id="calculateBtn">Calculate</button> 
-
-      <button id="resetBtn" type="button">Reset</button> 
-
-    </div> 
-
-  
-
-    <p id="result"></p> 
-
-  </div> 
-
-  
-
-  <script src="script.js"></script> 
-
-</body> 
-
-</html> 
+    <footer>
+      <p>Based on the statutory redundancy pay formula and rates published by GOV.UK.</p>
+      <p><a href="https://www.gov.uk/calculate-your-redundancy-pay" target="_blank" rel="noopener noreferrer">Check GOV.UK redundancy guidance</a></p>
+    </footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
